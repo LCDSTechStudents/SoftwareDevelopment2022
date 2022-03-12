@@ -3,19 +3,21 @@ package com.example.photolang;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
+import com.example.photolang.loginResponse.Root;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +54,17 @@ public class LoginPages extends AppCompatActivity {
                             public void onResponse(String response) {
                                 // Display the first 500 characters of the response string.
                               Toast.makeText(LoginPages.this, "Response: " + response, Toast.LENGTH_LONG).show();
-                              if (){
-
+                              try {
+                                  Root resp = JSON.parseObject(response, Root.class);
+                                  Log.d(resp.data.toString(), "onResponse: ");
+                                  if(resp.code == -1){
+                                      Log.d(resp.data.toString(), "onResponse: code -1");
+                                  }
+                              }catch (JSONException e){
+                                  //switch e here
+                                  Log.d("Parsing error", e.toString());
+                              }finally{
+                                  Log.d("On error", response.toString());
                               }
 
                             }
@@ -75,7 +86,7 @@ public class LoginPages extends AppCompatActivity {
                queue.add(stringRequest);
                queue.start();
 
-                opencameraActivity();
+            //    opencameraActivity();
             }
         });
 
