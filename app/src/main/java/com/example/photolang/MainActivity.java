@@ -10,11 +10,22 @@ import android.widget.TextView;
 
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 //import com.example.photolang.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private Object Loginpage;
 
-  //  private ActivityMainBinding binding;
+    //  private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login_page);
         //binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
-
+        Loginpage = new Loginpage();
 
        // BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -34,23 +45,6 @@ public class MainActivity extends AppCompatActivity {
        // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //NavigationUI.setupWithNavController(binding.nav_view, navController);
     }
-    public void username_input(View view){
-        TextView t = findViewById(R.id.username);
-        String input = t.getText().toString();
-        Log.d("info", input);
 
-    }
-
-    public void sendMessage(View view) {
-        View b = findViewById(R.id.button);
-        Button button = (Button) b;
-
-    }
-    public void registration(View view) {
-        View b = findViewById(R.id.button2);
-        Button button = (Button) b;
-        Intent intent_login= new Intent(MainActivity.this, register.class);
-        startActivity(intent_login);
-    }
 
 }
