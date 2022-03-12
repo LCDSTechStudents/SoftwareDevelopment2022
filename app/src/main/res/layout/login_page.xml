@@ -14,6 +14,12 @@
 
 
 
+
+
+
+
+
+
     ]]>
 
     <EditText
@@ -21,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="101dp"
         android:autofillHints=""
         android:ems="10"
@@ -29,8 +35,9 @@
         android:minHeight="48dp"
         android:text="@string/user_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/send"
@@ -69,42 +76,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="324dp"
         android:layout_marginEnd="101dp"
-        android:layout_marginBottom="306dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/pass_word"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:onClick="sendMessage"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="131dp"
         android:layout_height="48dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="392dp"
         android:layout_marginEnd="140dp"
+        android:layout_marginBottom="64dp"
         android:onClick="registration"
         android:text="@string/Register_"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/SendResponse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="299dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
