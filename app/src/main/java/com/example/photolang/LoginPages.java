@@ -34,8 +34,9 @@ public class LoginPages extends AppCompatActivity {
         String pass_input = pass.getText().toString();
         //For Send button
         Button sendbutton = (Button) findViewById(R.id.send);
-        sendbutton.setOnClickListener((View.OnClickListener) this){
-        public void onClick(View view){
+        sendbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Toast.makeText(LoginPages.this, "Button is working", Toast.LENGTH_LONG).show();
                 String user_text = user.getText().toString();
                 String pass_text = pass.getText().toString();
@@ -82,7 +83,7 @@ public class LoginPages extends AppCompatActivity {
                 queue.start();
 
             }
-            }
+        })
         ;
 
       //Second button
