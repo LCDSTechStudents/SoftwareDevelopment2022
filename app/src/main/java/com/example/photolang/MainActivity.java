@@ -13,12 +13,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -73,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 String url ="http://www.lancastertsa.com:1002/v1/auth/login";
 
+                JSONObject jsonBody = new JSONObject();
+                jsonBody.put("email", user_input);
+                jsonBody.put("password", pass_input);
+                String requestBody = jsonBody.toString();
 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -113,12 +119,21 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+
                         }){
                     @Override
-                    protected Map<String, String> getParams(){
-                        Map<String, String> paramV = new HashMap<>();
-                        paramV.put(user_input, pass_input);
-                        return paramV;
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        try {
+                            Log.d("requestbody", requestBody);
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                            return null;
+                        }
                     }
                 };
                 queue.add(stringRequest);
