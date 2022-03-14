@@ -17,29 +17,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.photolang.databinding.LoginPageBinding;
 import com.example.photolang.loginResponse.Root;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginPages extends AppCompatActivity {
-
-    public void notification(View v){
-        Log.d("you trigger the button", "haha ");
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         //  final TextView textView = (TextView) findViewById(R.id.SendResponse);
-
         TextView user = findViewById(R.id.username);
         TextView pass = findViewById(R.id.password);
         String user_input = user.getText().toString();
         String pass_input = pass.getText().toString();
+        Button button = findViewById(R.id.send);
         //For Send button
         //Button button = (Button) findViewById(R.id.send);
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("opening", "opened");
                String user_text = user.getText().toString();
@@ -90,19 +87,10 @@ public class LoginPages extends AppCompatActivity {
                queue.add(stringRequest);
                queue.start();
 
-            //    opencameraActivity();
-            }
-        });*/
-
-        //Second button
-        Button button2 = (Button) findViewById(R.id.register);
-        button2.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Log.d("you trigger the button", "haha ");
             }
         });
+
+        //Second button
     }
 
 }
