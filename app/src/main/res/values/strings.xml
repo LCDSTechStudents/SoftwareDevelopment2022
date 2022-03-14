@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PhotoLang</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -8,4 +8,9 @@
     <string name="user_name">Enter Username</string>
     <string name="pass_word">Enter Password</string>
     <string name="Register_">New? Sign Up Here</string>
+    <string name="sign_up" tools:ignore="DuplicateDefinition">Sign Up</string>
+    <string name="Thanks" tools:ignore="DuplicateDefinition">Thanks</string>
+    <string name="new_username">New Username</string>
+    <string name="new_password">New Password</string>
+
 </resources>
