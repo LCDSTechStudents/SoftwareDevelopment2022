@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent pull = new Intent(this, LoginPages.class);
+        startActivity(pull);
     }
 
 }

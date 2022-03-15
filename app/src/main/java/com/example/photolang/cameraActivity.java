@@ -10,12 +10,5 @@ public class cameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         //fake code
-        switch(respose){
-            case "wrong password":
-                //do something
-            case "not registered" :
-                //do something
-
-        }
     }
 }
