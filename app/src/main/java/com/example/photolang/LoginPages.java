@@ -32,6 +32,7 @@ import java.io.UnsupportedEncodingException;
 public class LoginPages extends AppCompatActivity {
 
     public void notification(View v){
+
         Log.d("you trigger the button", "haha ");
     }
     @Override
@@ -39,14 +40,17 @@ public class LoginPages extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+
         //  final TextView textView = (TextView) findViewById(R.id.SendResponse);
         Button button2 = (Button) findViewById(R.id.register);
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Log.d("you trigger the button", "haha ");
+                startRegister(view);
             }
         });
+
         //Send button
         Button sendButton = (Button) findViewById(R.id.send);
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -87,12 +91,12 @@ public class LoginPages extends AppCompatActivity {
                                     }
                                     switch(resp.status){
                                         case "wrong password":
-                                            //do something
+                                            Toast.makeText(getBaseContext(), "Wrong Password" , Toast.LENGTH_LONG).show();
                                         case "not registered":
-
+                                            Toast.makeText(getBaseContext(), "Wrong Password" , Toast.LENGTH_LONG).show();
 
                                         default:
-                                            Log.d("unknown error", resp.status);
+                                           openCameraActivity(v);
 
                                     }
                                 }catch(JSONException e){
@@ -162,6 +166,12 @@ public class LoginPages extends AppCompatActivity {
     }
     public void openCameraActivity(View view){
         Intent intent = new Intent(this,cameraActivity.class);
+        /*TextView user = findViewById(R.id.username);
+        TextView pass = findViewById(R.id.password);
+        String user_input = user.getText().toString();
+        String pass_input = pass.getText().toString();
+        intent.putExtra("Username", user_input);
+        intent.putExtra("Password", pass_input);*/
         startActivity(intent);
     }
 

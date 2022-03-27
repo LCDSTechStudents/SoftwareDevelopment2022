@@ -3,15 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/LCDS/software-development/app/src/main/res/layout/activity_camera.xml" value="0.2598958333333333" />
-        <entry key="..\:/LCDS/software-development/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
-        <entry key="..\:/LCDS/software-development/app/src/main/res/layout/activity_register.xml" value="0.32653985507246375" />
-        <entry key="..\:/LCDS/software-development/app/src/main/res/layout/fragment_home.xml" value="0.38333333333333336" />
-        <entry key="..\:/LCDS/software-development/app/src/main/res/layout/login_page.xml" value="0.32653985507246375" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_camera.xml" value="0.15677083333333333" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/fragment_home.xml" value="0.17255434782608695" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/login_page.xml" value="0.25" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_camera.xml" value="0.264" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/fragment_first.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/fragment_second.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/login_page.xml" value="0.29916897506925205" />
       </map>
     </option>
   </component>

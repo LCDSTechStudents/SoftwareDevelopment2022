@@ -12,5 +12,12 @@
     <string name="Thanks" tools:ignore="DuplicateDefinition">Thanks</string>
     <string name="new_username">New Username</string>
     <string name="new_password">New Password</string>
+    <string name="photolang">PHOTOLANG</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_flashcards">Your Flashcards</string>
+    <string name="characters">Characters</string>
+    <string name="welcome">Welcome!</string>
+    <string name="take_photo">Take Photo</string>
 
 </resources>
