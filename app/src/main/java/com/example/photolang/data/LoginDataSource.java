@@ -1,81 +1,100 @@
 package com.example.photolang.data;
 
+import android.content.Context;
 import android.os.NetworkOnMainThreadException;
+import android.telecom.Call;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.photolang.data.model.LoggedInUser;
 import com.example.photolang.loginResponse.LoginRequest;
 import com.example.photolang.loginResponse.ResponseRoot;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
+    private boolean ok;
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, Context context) {
         final Result[] result = new Result[1];
         try {
+
+            // .url("http://www.lancastertsa.com:1002/v1/auth/login")
             // TODO: handle loggedInUser authentication
-            OkHttpClient client = new OkHttpClient().newBuilder()
-                    .build();
-            MediaType mediaType = MediaType.parse("application/json");
-            LoginRequest loginRequest = new LoginRequest(username, password);
-            RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(loginRequest));
-            Request request = new Request.Builder()
-                    .url("http://www.lancastertsa.com:1002/v1/auth/login")
-                    .method("POST", body)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            client.newCall(request).enqueue(new Callback() {
+           //volley send
+            RequestQueue queue = Volley.newRequestQueue(context);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login", new Response.Listener<String>() {
                 @Override
-                public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    e.printStackTrace();
-                }
-
-                @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    try (ResponseBody responseBody = response.body()) {
-                        if (!response.isSuccessful())
-                            throw new IOException("Unexpected code " + response);
-
-                        Headers responseHeaders = response.headers();
-                        for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-                            System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                        }
-                        ResponseRoot json = JSON.parseObject(response.body().string(), ResponseRoot.class);
-                        if (json.getCode() == 0) {
-                            //int to string
-                            LoggedInUser user = new LoggedInUser(json.getData().getId(), json.getData().getNickname(), json.getData().getToken());
-                            result[0] = new Result.Success<>(user);
-                            return;
-                        }
-                        result[0] = new Result.Error(new Exception("Login failed"), json.status);
+                public void onResponse(String response) {
+                    //parse response
+                    ResponseRoot responseRoot = JSON.parseObject(response, ResponseRoot.class);
+                    //get token
+                    switch (responseRoot.getCode()) {
+                        case 0:
+                            //success
+                            setOk(true);
+                            result[0] = new Result.Success<>(new LoggedInUser(responseRoot.getData().getId(),responseRoot.getData().getNickname(), responseRoot.getData().getToken()));
+                        case -1:
+                            setOk(true);
+                            result[0] = new Result.Error(new IOException("登录失败"));
+                        default:
+                            setOk(true);
+                            throw new IllegalStateException("Unexpected value: " + responseRoot.getCode());
                     }
                 }
-            });
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    result[0] = new Result.Error(new IOException("Error logging in", error));
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("username",username);
+                    map.put("password",password);
+                    return map;
+
+                }
+            };
+            queue.add(stringRequest);
+            queue.start();
         } catch (NetworkOnMainThreadException e) {
             Log.e("LoginDataSource", e.toString());
-            return new Result.Error(new IOException("Error logging in", e));
+            result[0] = new Result.Error(new IOException("Error logging in", e));
+        }finally{
+            awaitForOk();
+            return result[0];
         }
-        return result[0];
     }
 
     public void logout() {
         // TODO: revoke authentication
+    }
+
+    public void awaitForOk(){
+        while(true){
+            if (ok){
+                return;
+            }
+        }
+    }
+    public void setOk(boolean ok){
+        this.ok = ok;
     }
 }
