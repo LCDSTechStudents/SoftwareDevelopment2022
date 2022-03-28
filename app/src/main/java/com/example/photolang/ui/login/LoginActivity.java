@@ -19,8 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.photolang.R;
-import com.example.photolang.ui.login.LoginViewModel;
-import com.example.photolang.ui.login.LoginViewModelFactory;
+
 import com.example.photolang.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

@@ -37,7 +37,8 @@ public class LoginDataSource {
             // TODO: handle loggedInUser authentication
            //volley send
             RequestQueue queue = Volley.newRequestQueue(context);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login", new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login",
+                    new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //parse response
@@ -57,11 +58,9 @@ public class LoginDataSource {
                     }
                 }
 
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    result[0] = new Result.Error(new IOException("Error logging in", error));
-                }
+            }, error -> {
+                setOk(true);
+                result[0] = new Result.Error(new IOException("Error logging in", error));
             }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
