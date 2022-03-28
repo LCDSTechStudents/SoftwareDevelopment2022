@@ -29,14 +29,12 @@ import java.util.Map;
 public class LoginDataSource {
     private boolean ok;
 
-    public Result<LoggedInUser> login(String username, String password, Context context) {
+    public Result<LoggedInUser> login(String username, String password, RequestQueue queue) {
         final Result[] result = new Result[1];
         try {
 
             // .url("http://www.lancastertsa.com:1002/v1/auth/login")
             // TODO: handle loggedInUser authentication
-           //volley send
-            RequestQueue queue = Volley.newRequestQueue(context);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login",
                     new Response.Listener<String>() {
                 @Override
@@ -58,10 +56,16 @@ public class LoginDataSource {
                     }
                 }
 
-            }, error -> {
-                setOk(true);
-                result[0] = new Result.Error(new IOException("Error logging in", error));
-            }){
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("errorMSG", error.toString());
+                    setOk(true);
+                    result[0] = new Result.Error(new IOException("Error logging in", error));
+                }
+            })
+            {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String,String> map = new HashMap<String,String>();
@@ -72,7 +76,6 @@ public class LoginDataSource {
                 }
             };
             queue.add(stringRequest);
-            queue.start();
         } catch (NetworkOnMainThreadException e) {
             Log.e("LoginDataSource", e.toString());
             result[0] = new Result.Error(new IOException("Error logging in", e));

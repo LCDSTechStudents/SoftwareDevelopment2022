@@ -2,6 +2,7 @@ package com.example.photolang.data;
 
 import android.content.Context;
 
+import com.android.volley.RequestQueue;
 import com.example.photolang.data.model.LoggedInUser;
 
 /**
@@ -45,9 +46,9 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password, Context context) {
+    public Result<LoggedInUser> login(String username, String password, RequestQueue queue) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password, context);
+        Result<LoggedInUser> result = dataSource.login(username, password, queue);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }

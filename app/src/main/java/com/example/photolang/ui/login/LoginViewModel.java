@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
 
+import com.android.volley.RequestQueue;
 import com.example.photolang.data.LoginRepository;
 import com.example.photolang.data.Result;
 import com.example.photolang.data.model.LoggedInUser;
@@ -30,10 +31,10 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password, Context context) {
+    public void login(String username, String password, RequestQueue queue) {
 
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password, context);
+        Result<LoggedInUser> result = loginRepository.login(username, password, queue);
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
