@@ -1,52 +1,48 @@
 package com.example.photolang;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
 
-//import com.example.photolang.databinding.ActivityMainBinding;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.example.photolang.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int REQUEST_ID = 123;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private AppBarConfiguration appBarConfiguration;
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //Intent pull = new Intent(this, LoginPages.class);
-        //startActivity(pull);
-        dispatchTakePictureIntent();
 
-    }
-    private void dispatchTakePictureIntent() {
-        final Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, REQUEST_ID);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && data != null && requestCode == REQUEST_ID) {
-            Bitmap photo = data.getExtras().getParcelable("data");
-            ImageView imageView = (ImageView) findViewById(R.id.imageView2);
-            imageView.setImageBitmap(photo);
-        }
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
-
-    //@Override
-//    protected void onResume() {
-//        mIsResumed = true;
-//        super.onResume();
-//    }
-//    @Override
-//    protected void onPause() {
-//       mIsResumed = false;
-//       super.onPause();
-//    }
-
-
 }

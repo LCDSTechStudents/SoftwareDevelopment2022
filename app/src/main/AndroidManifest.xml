@@ -3,7 +3,7 @@
     package="com.example.photolang">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,13 +17,13 @@
         android:theme="@style/Theme.PhotoLang"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".LoginPages"
+            android:name=".sample.LoginPages"
             android:exported="false" />
         <activity
-            android:name=".cameraActivity"
+            android:name=".sample.cameraActivity"
             android:exported="false" />
         <activity
-            android:name=".register"
+            android:name=".sample.register"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
