@@ -37,7 +37,6 @@ public class register extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Log.d("you trigger the button", "haha ");
                 TextView user = findViewById(R.id.newUsername);
                 TextView pass = findViewById(R.id.newPassword);
                 String user_text = user.getText().toString();
