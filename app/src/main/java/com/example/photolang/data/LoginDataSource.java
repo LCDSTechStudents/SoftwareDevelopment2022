@@ -32,7 +32,6 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password, RequestQueue queue) {
         final Result[] result = new Result[1];
         try {
-
             // .url("http://www.lancastertsa.com:1002/v1/auth/login")
             // TODO: handle loggedInUser authentication
             StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login",
@@ -45,13 +44,11 @@ public class LoginDataSource {
                     switch (responseRoot.getCode()) {
                         case 0:
                             //success
-                            setOk(true);
-                            result[0] = new Result.Success<>(new LoggedInUser(responseRoot.getData().getId(),responseRoot.getData().getNickname(), responseRoot.getData().getToken()));
+                            notifyLoggedIn(new Result.Success<>(new LoggedInUser(responseRoot.getData().getId(),responseRoot.getData().getNickname(), responseRoot.getData().getToken())));
+
                         case -1:
-                            setOk(true);
-                            result[0] = new Result.Error(new IOException("登录失败"));
+                            notifyLoggedIn(new Result.Error(new IOException(responseRoot.getStatus())));
                         default:
-                            setOk(true);
                             throw new IllegalStateException("Unexpected value: " + responseRoot.getCode());
                     }
                 }
@@ -60,9 +57,8 @@ public class LoginDataSource {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("errorMSG", error.toString());
-                    setOk(true);
-                    result[0] = new Result.Error(new IOException("Error logging in", error));
+                    //error login
+                    notifyLoggedIn(new Result.Error(new IOException("Error logging in", error)));
                 }
             })
             {
@@ -78,25 +74,18 @@ public class LoginDataSource {
             queue.add(stringRequest);
         } catch (NetworkOnMainThreadException e) {
             Log.e("LoginDataSource", e.toString());
-            result[0] = new Result.Error(new IOException("Error logging in", e));
-        }finally{
-            awaitForOk();
-            return result[0];
+             new Result.Error(new IOException("Error logging in", e));
         }
+        return
     }
 
     public void logout() {
         // TODO: revoke authentication
     }
 
-    public void awaitForOk(){
-        while(true){
-            if (ok){
-                return;
-            }
-        }
+    private void notifyLoggedIn(Result result) {
+
     }
-    public void setOk(boolean ok){
-        this.ok = ok;
-    }
+
+
 }
