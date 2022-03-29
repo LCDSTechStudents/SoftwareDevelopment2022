@@ -41,42 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         Intent login = new Intent(this, LoginActivity.class);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //parse response
-                        Log.d("response", response);
-                        }
-
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Getting errors", error.getMessage());
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("username","pidersk@gmail.com");
-                map.put("password","1234");
-                return map;
-
-            }
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("Content-Type","application/json; charset=utf-8");
-                return map;
-            }
-        };
-        queue.add(stringRequest);
-        queue.start();
         setContentView(binding.getRoot());
-        //startActivity(login);
+        startActivity(login);
 
 
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
