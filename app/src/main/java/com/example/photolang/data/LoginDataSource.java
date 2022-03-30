@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 
 /**
@@ -40,27 +42,38 @@ public class LoginDataSource {
 
         JSONObject req = new JSONObject();
         try {
-            req.put("username", username);
+            req.put("email", username);
             req.put("password", password);
         }catch (JSONException e){
             throw new RuntimeException(e);
         }
         RequestFuture<JSONObject> future = RequestFuture.newFuture();
         // TODO: handle loggedInUser authentication
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login", req, null, future);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "http://www.lancastertsa.com:1002/v1/auth/login", req, future, future);
         queue.add(request);
         try {
-            JSONObject response = future.get();
+            JSONObject response = future.get(10000, java.util.concurrent.TimeUnit.MILLISECONDS);
             String code = response.getString("code");
             switch (code){
                 case "0":
                     JSONObject data = response.getJSONObject("Data");
                     return new Result.Success<>(new LoggedInUser(data.getInt("id"),data.getString("nickname"),data.getString("token")));
+                case "-1":
+                    return new Result.Error(new IOException("Invalid username/password."), "error password or email");
             }
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            if(e.getCause() instanceof VolleyError){
+                VolleyError error = (VolleyError) e.getCause();
+                NetworkResponse resp = error.networkResponse;
+                if(resp != null){
+                    Log.d("status code",resp.statusCode + "");
+                    return new Result.Error(new IOException(resp.data.toString() + ""));
+                }
+            }
         } catch (JSONException e) {
             throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+            return new Result.Error(new IOException("timeout"));
         }
         return new Result.Error(new IOException("Error logging in"));
     }
