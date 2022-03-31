@@ -37,5 +37,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_general">GeneralActivity</string>
+    <string name="text_label_1">quick</string>
+    <string name="text_label_2">shot</string>
 
 </resources>
