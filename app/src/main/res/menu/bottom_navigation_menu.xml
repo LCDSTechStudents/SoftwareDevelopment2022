@@ -8,10 +8,11 @@
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/camera_nav"
-        android:title="@string/text_label_2"/>
+        android:icon="@drawable/flashcards_nav"
+        android:title="@string/text_label_2" />
     <item
         android:id="@+id/page_3"
         android:enabled="true"
-        android:title="@string/text_label_2" />
+        android:icon="@drawable/person_nav"
+        android:title="@string/text_label_3" />
 </menu>
