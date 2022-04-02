@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private FlashcardsFragment flashcardsFragment;
+    private ScanFragment      scanFragment;
+    private ProfileFragment profileFragment;
+
     private Fragment currentFragment;
 
 
@@ -43,22 +47,30 @@ public class MainActivity extends AppCompatActivity {
         Intent login = new Intent(this, LoginActivity.class);
         setContentView(binding.getRoot());
         initFragments(savedInstanceState);
-//        NavController navController = Navigation.findNavController(this, R.id.);
-//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+        navView = findViewById(R.id.bottom_navigation);
+        navView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.page_1) {
-
+                    if (scanFragment == null) {
+                        scanFragment = ScanFragment.newInstance();
+                    }
+                    switchFragment(currentFragment, scanFragment);
+                    return true;
                 }
                 if (item.getItemId() == R.id.page_2) {
-
-
+                    if (flashcardsFragment == null) {
+                        flashcardsFragment = FlashcardsFragment.newInstance();
+                    }
+                    switchFragment(currentFragment, flashcardsFragment);
+                    return true;
                 }
                 if (item.getItemId() == R.id.page_3) {
-                    startActivity(login);
+                    if (profileFragment == null) {
+                        profileFragment = ProfileFragment.newInstance();
+                    }
+                    switchFragment(currentFragment, profileFragment);
+                    return true;
                 }
                 return false;
             }
@@ -70,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-
+            scanFragment = ScanFragment.newInstance();
+            currentFragment = scanFragment;
+            ft.add(R.id.fragment_container, scanFragment).commit();
         }
     }
 
@@ -80,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             if (!to.isAdded()) {
-
+                ft.hide(from).add(R.id.fragment_container, to).commit();
             }else{
                 ft.hide(from).show(to).commit();
-
             }
         }
     }

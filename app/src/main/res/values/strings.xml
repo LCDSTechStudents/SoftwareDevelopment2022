@@ -29,5 +29,15 @@
     <string name="flashcards">Flashcards</string>
     <string name="profile">Profile</string>
     <string name="scan">Scan</string>
-
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="text_label_1">Scan</string>
+    <string name="text_label_2">Flashcards</string>
+    <string name="text_label_3">Profile</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="prompt_password">input password</string>
+    <string name="action_sign_in_short">action</string>
+    <string name="prompt_email">input email</string>
+    <string name="login_failed">Login Fail!</string>
+    <string name="invalid_username">Invalid user name</string>
+    <string name="invalid_password">Invalid password</string>
 </resources>
