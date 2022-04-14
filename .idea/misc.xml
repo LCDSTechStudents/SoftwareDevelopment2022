@@ -3,48 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_camera.xml" value="0.264" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_register.xml" value="0.1" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/fragment_first.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/fragment_second.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/login_page.xml" value="0.29916897506925205" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.3155" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1555" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1555" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/icon_1.xml" value="0.296" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/icon_2.xml" value="0.296" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/drawable/sound_character.xml" value="0.479" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/activity_general.xml" value="0.24682971014492755" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/activity_login.xml" value="0.24682971014492755" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/content_main.xml" value="0.25" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_first.xml" value="0.1" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_flashcards.xml" value="0.3125" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_flashcards_list.xml" value="0.3125" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_login.xml" value="0.29791666666666666" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_profile.xml" value="0.4515625" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_scan.xml" value="0.3125" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_second.xml" value="0.2921875" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/my_info_fragment.xml" value="0.3125" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2921875" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2921875" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.362" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/activity_camera.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/activity_general.xml" value="0.48097826086956524" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/activity_login.xml" value="0.17907801418439717" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/activity_register.xml" value="0.182370820668693" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/content_main.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/fragment_dashboard.xml" value="0.182370820668693" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/fragment_first.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/fragment_home.xml" value="0.182370820668693" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/fragment_notifications.xml" value="0.182370820668693" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/fragment_second.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/login_page.xml" value="0.182370820668693" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/layout/test.xml" value="0.33" />
-        <entry key="..\:/repo/java/SoftwareDevelopment2022/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36923076923076925" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_camera.xml" value="0.4" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_classifier.xml" value="0.1" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_classifier2.xml" value="0.1" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_classifier_java.xml" value="0.1" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/activity_testactivity.xml" value="0.264" />
+        <entry key="..\:/Users/andyj/StudioProjects/SoftwareDevelopment2022/app/src/main/res/layout/classifier_fragment.xml" value="0.264" />
       </map>
     </option>
   </component>

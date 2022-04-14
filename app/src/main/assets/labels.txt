@@ -1,0 +1,10 @@
+0 apple
+1 banana
+2 beetroot
+3 bell pepper
+4 cabbage
+5 carrot
+6 cauliflower
+7 chili pepper
+8 corn
+9 cucumber
