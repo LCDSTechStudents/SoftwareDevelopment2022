@@ -53,6 +53,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/*
+public class Card {
+    ImageView imageview;
+    TextView numberResult;
+    TextView translationResult;
+}
+*/
+
+// Video, live stream of the photo frames, you can set frame rate (how many frames per seconds)
+// Feed in the captured frame into the model (not single classification, objects detection)
+// YOLO => Classes (texts or the indices) and bounding box cordinates (x, y) on the frame
+
 public class cameraActivity extends AppCompatActivity {
     private static final int DIM_IMG_SIZE_X = 224;
     private static final int DIM_IMG_SIZE_Y = 224;
@@ -61,7 +73,9 @@ public class cameraActivity extends AppCompatActivity {
     ImageView imageview;
     TextView numberResult;
     TextView translationResult;
+    // Collection container
     Interpreter interpreter;
+
     static final String MODEL_PATH = "model.tflite";
     private final float[][] labelProbArray = new float[1][10];
     final String ASSOCIATED_AXIS_LABELS = "labels.txt";
@@ -94,6 +108,15 @@ public String[] labels() throws IOException {
         long declaredLength = fileDescriptor.getDeclaredLength();
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
     }
+
+    /*
+    List [(Thumbnail, Text)]
+
+    Button -> oncick:
+     fires the classify, Then append the reuslts to the list
+     and render the list.
+
+     */
 
     ActivityResultLauncher<String> mgetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
@@ -148,6 +171,7 @@ public String[] labels() throws IOException {
                     maxPos = i;
                 }
             }
+
             String[] classes = {"Apple", "Banana", "beetroot",
                     "bell pepper" ,
                     "cabbage" ,
@@ -160,16 +184,18 @@ public String[] labels() throws IOException {
             translationResult.setText(classes[maxPos]);
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < classes.length; i++) {
-                s.append(String.format("%s: 1.f%%\n", classes[i], confidences[i]));
+                s.append(String.format("%s: %.4f\n", classes[i], confidences[i]));
             }
+
             numberResult.setText(confidences[maxPos] + "");
+            //numberResult.setText( s.toString() );
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
             // TODO Handle the exception
         }
     }
-
+/*
     private static List<String> mapValuetoLabels(TensorBuffer tensorBuffer, List<String> labels, int offset) {
         float[] values = tensorBuffer.getFloatArray();
         List<String> result = new ArrayList<>();
@@ -180,7 +206,8 @@ public String[] labels() throws IOException {
         }
         return result;
     }
-
+*/
+   /*
     @SuppressLint("SetTextI18n")
     private void convertBitmapToByteBuffer(Bitmap bitmap) throws IOException {
         int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
@@ -205,6 +232,8 @@ public String[] labels() throws IOException {
         numberResult.setText(labelProbArray[0][maxIndex] + "");
 
     }
+    */
+
 
 
     @Override
@@ -222,8 +251,13 @@ public String[] labels() throws IOException {
                 mgetContent.launch("image/*");
             }
         });
-    }
 
+     /*   Button btn;
+        // Do you have to train and deploy your own model?
+        // Alternative, use Google API? It maybe free and is easy. But requires Internet.
+        btn.setPadding();
+    }
+*/
 
   /*  private void openCamera() {
         //ContentValues values = new ContentValues();
@@ -282,6 +316,6 @@ public String[] labels() throws IOException {
         //classifier classifier = new classifier();
        // classifier.classify(bitmap);
 
+    }*/
     }
-}*/
 }
