@@ -1,18 +1,14 @@
 package com.example.photolang.ui.cameraActivity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import android.graphics.Bitmap;
-import android.graphics.ColorSpace;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,15 +29,8 @@ import com.example.photolang.ml.Model;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.support.common.ops.NormalizeOp;
-import org.tensorflow.lite.support.image.ImageProcessor;
-import org.tensorflow.lite.support.image.TensorImage;
-import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
-import org.tensorflow.lite.support.common.TensorProcessor;
-import org.tensorflow.lite.support.label.TensorLabel;
-import org.tensorflow.lite.support.common.FileUtil;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
@@ -49,9 +38,7 @@ import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /*
 public class Card {
@@ -154,6 +141,7 @@ public String[] labels() throws IOException {
                     int pix = intValues[pixel++];
                     byteBuffer.putFloat(((pix >> 16) & 0xFF) * (1.f / 255.f));
                     byteBuffer.putFloat(((pix >> 8) & 0xFF) * (1.f / 255.f));
+                    byteBuffer.putFloat((pix & 0xFF) * (1.f / 255.f));
 
                 }
             }
