@@ -1,5 +1,7 @@
 package com.example.photolang.ui.flashcards;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.photolang.R;
+import com.example.photolang.data.storage.DBHelper;
 import com.example.photolang.data.tf.ModelResult;
 
 /**
@@ -90,16 +93,21 @@ public class ResultFragment extends Fragment {
     private final View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            new Thread(save).start();
         }
     };
 
-    Handler.Callback callback = new Handler.Callback() {
+    Runnable save = new Runnable() {
         @Override
-        public boolean handleMessage(android.os.Message msg) {
-            return false;
+        public void run() {
+            DBHelper dbHelper = new DBHelper(getContext(), DBHelper.DATABASE_NAME,null,DBHelper.DATABASE_VERSION);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            db.insert("flashcards", null, modelResult.getContentValues());
+            Cursor cursor = db.query("flashcards", null, null, null, null, null, null);
+            cursor.moveToFirst()
+            dbHelper.close();
+            db.close();
         }
     };
-
 
 }

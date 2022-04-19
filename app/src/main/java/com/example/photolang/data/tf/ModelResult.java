@@ -1,5 +1,6 @@
 package com.example.photolang.data.tf;
 
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -70,5 +71,13 @@ public class ModelResult implements Parcelable {
         parcel.writeString(cls);
         parcel.writeFloat(score);
     }
+
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(SFlashcard.COLUMN_NAME_CLASS, cls);
+        values.put(SFlashcard.COLUMN_NAME_SCORE, score);
+        return values;
+    }
+
 
 }

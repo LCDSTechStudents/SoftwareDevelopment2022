@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         Intent login = new Intent(this, LoginActivity.class);
         setContentView(binding.getRoot());
 
+
+
         initFragments(savedInstanceState);
         navView = findViewById(R.id.bottom_navigation);
         navView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {

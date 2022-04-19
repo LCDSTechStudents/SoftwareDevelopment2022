@@ -1,28 +1,23 @@
 package com.example.photolang.data.storage;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
-public class SFlashcard {
-    @PrimaryKey(autoGenerate = true)
+public class SFlashcard{
+
+    public static final String COLUMN_NAME_CLASS = "class";
+    public static final String COLUMN_NAME_LANG = "lang";
+    public static final String COLUMN_NAME_SCORE = "score";
+    public static final String COLUMN_NAME_IMAGENAME = "image_name";
+
     public int id;
-
-    @ColumnInfo(name = "class")
-    public String word;
-
-    @ColumnInfo(name ="score")
+    public String words;
     public float score;
-
-    @ColumnInfo(name = "image_name")
     public String imageName;
 
-    public SFlashcard(String word, float score) {
-        this.word = word;
+    public SFlashcard(String words, float score){
+        this.words = words;
         this.score = score;
-        this.imageName =  new Date(System.currentTimeMillis()).toString();
+        this.imageName = new Date(System.currentTimeMillis()).toString();
     }
 }
