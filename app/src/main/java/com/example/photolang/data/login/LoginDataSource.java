@@ -1,33 +1,20 @@
-package com.example.photolang.data;
+package com.example.photolang.data.login;
 
-import android.content.Context;
-import android.os.NetworkOnMainThreadException;
-import android.telecom.Call;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.RequestFuture;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.photolang.data.model.LoggedInUser;
-import com.example.photolang.loginResponse.LoginRequest;
-import com.example.photolang.loginResponse.ResponseRoot;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 

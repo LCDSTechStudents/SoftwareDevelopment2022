@@ -8,8 +8,8 @@ import android.util.Log;
 import android.util.Patterns;
 
 import com.android.volley.RequestQueue;
-import com.example.photolang.data.LoginRepository;
-import com.example.photolang.data.Result;
+import com.example.photolang.data.login.LoginRepository;
+import com.example.photolang.data.login.Result;
 import com.example.photolang.data.model.LoggedInUser;
 import com.example.photolang.R;
 

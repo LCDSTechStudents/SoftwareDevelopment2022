@@ -1,6 +1,4 @@
-package com.example.photolang.data;
-
-import android.content.Context;
+package com.example.photolang.data.login;
 
 import com.android.volley.RequestQueue;
 import com.example.photolang.data.model.LoggedInUser;

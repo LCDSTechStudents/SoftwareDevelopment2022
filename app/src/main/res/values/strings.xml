@@ -43,4 +43,15 @@
     <string name="take_a_photo">Take a Photo</string>
     <string name="button">Button</string>
     <string name="textview">TextView</string>
+
+
+    <!-- SCAN FRAGMENT -->
+    <string name="trust">Trust</string>
+    <string name="object">Possible Object</string>
+    <string name="capture">Capture Image</string>
+
+    <!-- RESULT FRAGMENT -->
+    <string name="btn_retake">Retake</string>
+    <string name="btn_save">Save Flashcard</string>
+
 </resources>

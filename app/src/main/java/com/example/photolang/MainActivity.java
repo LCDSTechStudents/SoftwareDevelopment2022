@@ -3,6 +3,7 @@ package com.example.photolang;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.photolang.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -22,8 +23,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.example.photolang.databinding.ActivityMainBinding;
 import com.example.photolang.ui.login.LoginActivity;
 
-import com.example.photolang.R;
-
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navView;
 
@@ -31,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
 
-
     private FlashcardsFragment flashcardsFragment;
-    private ScanFragment      scanFragment;
+    private ScanFragment scanFragment;
     private ProfileFragment profileFragment;
 
     private Fragment currentFragment;
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         Intent login = new Intent(this, LoginActivity.class);
         setContentView(binding.getRoot());
+
         initFragments(savedInstanceState);
         navView = findViewById(R.id.bottom_navigation);
         navView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
     public void initFragments(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
@@ -95,18 +95,12 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft = fm.beginTransaction();
             if (!to.isAdded()) {
                 ft.hide(from).add(R.id.fragment_container, to).commit();
-            }else{
+            } else {
                 ft.hide(from).show(to).commit();
             }
         }
     }
-        //startActivity(login);
 
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        return NavigationUI.navigateUp(navController, appBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
+
 }

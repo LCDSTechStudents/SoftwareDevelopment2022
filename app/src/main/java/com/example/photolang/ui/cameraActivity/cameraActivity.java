@@ -82,8 +82,6 @@ public String[] labels() throws IOException {
     // storing the data in arraylist to array
     String[] labels
             = listOfStrings.toArray(new String[0]);
-
-
     return labels;
 }
 
@@ -183,46 +181,6 @@ public String[] labels() throws IOException {
             // TODO Handle the exception
         }
     }
-/*
-    private static List<String> mapValuetoLabels(TensorBuffer tensorBuffer, List<String> labels, int offset) {
-        float[] values = tensorBuffer.getFloatArray();
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] > 0.5) {
-                result.add(labels.get(i + offset));
-            }
-        }
-        return result;
-    }
-*/
-   /*
-    @SuppressLint("SetTextI18n")
-    private void convertBitmapToByteBuffer(Bitmap bitmap) throws IOException {
-        int[] intValues = new int[bitmap.getWidth() * bitmap.getHeight()];
-
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * 3 * 4);
-        byteBuffer.order(ByteOrder.nativeOrder());
-        byteBuffer.rewind();
-        for (int intValue : intValues) {
-            byteBuffer.putInt(intValue);
-        }
-        float max = 0;
-        int maxIndex = 0;
-        for (int i = 0; i < labelProbArray[0].length; i++) {
-            if (labelProbArray[0][i] > max) {
-                max = labelProbArray[0][i];
-                maxIndex = i;
-            }
-
-        }
-        interpreter.run(byteBuffer, labelProbArray);
-        numberResult.setText(labelProbArray[0][maxIndex] + "");
-
-    }
-    */
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
