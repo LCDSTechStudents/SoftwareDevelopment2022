@@ -15,9 +15,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = "create table if not exists flashcards(id INT primary key autoincrement, word TEXT, score TEXT, image_name TEXT) " ;
-        sqLiteDatabase.execSQL(sql);
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS flashcards");
+        String sql = "create table if not exists flashcards(id INTEGER primary key autoincrement, class TEXT, score TEXT, image_name TEXT) " ;
+        db.execSQL(sql);
     }
 
     @Override

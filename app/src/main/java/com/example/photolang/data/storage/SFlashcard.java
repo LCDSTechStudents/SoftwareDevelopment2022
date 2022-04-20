@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class SFlashcard{
 
+    public static final String TABLE_NAME = "flashcards";
     public static final String COLUMN_NAME_CLASS = "class";
     public static final String COLUMN_NAME_LANG = "lang";
     public static final String COLUMN_NAME_SCORE = "score";

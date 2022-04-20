@@ -7,15 +7,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.photolang.R;
 import com.example.photolang.data.storage.DBHelper;
+import com.example.photolang.data.storage.SFlashcard;
 import com.example.photolang.data.tf.ModelResult;
 
 /**
@@ -57,7 +60,6 @@ public class ResultFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             modelResult = getArguments().getParcelable("modelResult");
-
             modelResult.getImage();
         }
 
@@ -100,11 +102,15 @@ public class ResultFragment extends Fragment {
     Runnable save = new Runnable() {
         @Override
         public void run() {
+            Looper.prepare();
             DBHelper dbHelper = new DBHelper(getContext(), DBHelper.DATABASE_NAME,null,DBHelper.DATABASE_VERSION);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.insert("flashcards", null, modelResult.getContentValues());
-            Cursor cursor = db.query("flashcards", null, null, null, null, null, null);
-            cursor.moveToFirst()
+            Cursor cursor = db.query(SFlashcard.TABLE_NAME, null, null, null, null, null, null);
+            while(cursor.moveToNext()){
+                Toast toast = Toast.makeText(getContext(), cursor.getString(1), Toast.LENGTH_SHORT);
+                toast.show();
+            }
             dbHelper.close();
             db.close();
         }
