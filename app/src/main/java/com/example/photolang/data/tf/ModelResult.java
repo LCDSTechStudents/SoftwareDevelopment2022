@@ -40,24 +40,11 @@ public class ModelResult implements Parcelable {
     public String getCls() {
         return cls;
     }
-    public void setCls(String cls) {
-        this.cls = cls;
-    }
     public float getScore() {
         return score;
     }
-    public void setScore(float score) {
-        this.score = score;
-    }
     public Bitmap getImage() {
         return image;
-    }
-    public void setImage(Bitmap image) {
-        this.image = image;
-    }
-
-    public SFlashcard getFlashcard() {
-        return new SFlashcard(cls, score);
     }
 
 
@@ -71,13 +58,4 @@ public class ModelResult implements Parcelable {
         parcel.writeString(cls);
         parcel.writeFloat(score);
     }
-
-    public ContentValues getContentValues() {
-        ContentValues values = new ContentValues();
-        values.put(SFlashcard.COLUMN_NAME_CLASS, cls);
-        values.put(SFlashcard.COLUMN_NAME_SCORE, score);
-        return values;
-    }
-
-
 }
