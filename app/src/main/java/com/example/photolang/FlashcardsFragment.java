@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -14,10 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.photolang.data.storage.DBHelper;
 import com.example.photolang.data.storage.SFlashcard;
+import com.example.photolang.ui.flashcards.FlashcardListAdapter;
+
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +41,8 @@ public class FlashcardsFragment extends Fragment {
     private static final int MSG_LOAD_FLASHCARDS = 2;
     private static final int MSG_SHOW_LOADING = 3;
     private static final int MSG_HIDE_LOADING = 4;
+    private static final int MSG_DELAY_LOADING = 5;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -43,6 +51,7 @@ public class FlashcardsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private final ReentrantLock lock = new ReentrantLock();
 
     private Handler MainHandler = new Handler(Looper.getMainLooper()){
         @Override
@@ -56,14 +65,19 @@ public class FlashcardsFragment extends Fragment {
                 case MSG_LOAD_FLASHCARDS:
                     //receive all flashcards from child thread
                     flashcards = (SFlashcard[]) msg.obj;
+                    if (flashcards == null) {
+                        throw new RuntimeException("flashcards is null");
+                    }
                     renderCards(view, flashcards);
                     break;
                 case MSG_SHOW_LOADING:
                     //show loading
+
                     break;
                 case MSG_HIDE_LOADING:
                     //close loading
                     break;
+
             }
         }
     };
@@ -91,15 +105,28 @@ public class FlashcardsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_flashcards, container, false);
-        subHandler.sendMessage(subHandler.obtainMessage(MSG_GET_ALL_FLASHCARDS, v));
-        this.view = v;
-        return v;
+        this.view = inflater.inflate(R.layout.fragment_flashcards, container, false);
+        MainHandler.sendMessage(MainHandler.obtainMessage(MSG_SHOW_LOADING));
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() { subHandler.sendMessage(Message.obtain(subHandler,MSG_GET_ALL_FLASHCARDS));
+            }
+        }, 2000);
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //waiting for subhandler to be initialized
     }
 
     public void renderCards(View v, SFlashcard[] flashcards) {
-        ArrayAdapter<SFlashcard> adapter = new ArrayAdapter<SFlashcard>(getContext(), android.R.layout.simple_list_item_1, flashcards);
-        ListView list = v.findViewById(R.id.flashcards_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
+        RecyclerView list = v.findViewById(R.id.flashcards_list_recycler);
+        FlashcardListAdapter adapter = new FlashcardListAdapter(flashcards);
+        list.setLayoutManager(layoutManager);
         list.setAdapter(adapter);
     }
 
@@ -114,8 +141,10 @@ public class FlashcardsFragment extends Fragment {
         public void run() {
             Looper.prepare();
             Message msg = new Message();
-            msg.what = 0;
+            msg.what = MSG_GET_SUB_HANDLER;
             msg.obj = childHandler;
+            UIHandler.sendMessage(msg);
+            Looper.loop();
             super.run();
         }
 
@@ -125,10 +154,10 @@ public class FlashcardsFragment extends Fragment {
                 super.handleMessage(msg);
                 switch (msg.what){
                     case MSG_GET_ALL_FLASHCARDS:
-                        sendMessage(obtainMessage(MSG_SHOW_LOADING));
+                        UIHandler.sendMessage(obtainMessage(MSG_SHOW_LOADING));
                         SFlashcard[] cards = getAllFlashcards();
-                        sendMessage(obtainMessage(MSG_LOAD_FLASHCARDS, cards));
-                        sendMessage(obtainMessage(MSG_HIDE_LOADING, cards));
+                        UIHandler.sendMessage(obtainMessage(MSG_LOAD_FLASHCARDS, cards));
+                        UIHandler.sendMessage(obtainMessage(MSG_HIDE_LOADING));
                         break;
 
                 }
@@ -136,9 +165,9 @@ public class FlashcardsFragment extends Fragment {
         };
 
         private SFlashcard[] getAllFlashcards(){
-            DBHelper dbHelper = new DBHelper(getContext(), "flashcards", null, DBHelper.DATABASE_VERSION);
+            DBHelper dbHelper = new DBHelper(getContext(), DBHelper.DATABASE_NAME, null, DBHelper.DATABASE_VERSION);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("flashcards", null, null, null, null, null, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM flashcards", null);
             SFlashcard[] flashcards = new SFlashcard[cursor.getCount()];
             int i = 0;
             while (cursor.moveToNext()){
@@ -149,6 +178,8 @@ public class FlashcardsFragment extends Fragment {
                         cursor.getString(SFlashcard.COLUMN_INDEX_IMAGENAME));
                 i++;
             }
+            cursor.close();
+            db.close();
             return flashcards;
         }
     }

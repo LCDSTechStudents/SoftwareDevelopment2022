@@ -166,8 +166,13 @@ public class ResultFragment extends Fragment {
                         saveImage(card);
                         break;
                     case 2:
-                        //save image no matter what
-                        trueSave(card);
+                        try {
+                            trueSave(card);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            UIHandler.sendMessage(Message.obtain(UIHandler, 1, e));
+                        }
+
                         break;
                 }
             }
@@ -205,23 +210,42 @@ public class ResultFragment extends Fragment {
                 return;
             }
             try {
-                ImageSaver.saveFlashCard(card);
+                String name = ImageSaver.saveFlashCard(getContext(),card);
+                if(ImageSaver.hasFlashcard(getContext(),name)){
+                    db.insert(SFlashcard.TABLE_NAME, null, card.getContentValues());
+                    uiHandler.obtainMessage(3).sendToTarget();
+                    cursor.close();
+                    dbHelper.close();
+                    db.close();
+                    return;
+                }else{
+                    uiHandler.obtainMessage(1).sendToTarget();
+                    cursor.close();
+                    dbHelper.close();
+                    db.close();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 Message msg = new Message();
                 msg.what = 1;
                 msg.obj = e;
                 uiHandler.sendMessage(msg);
+                cursor.close();
+                dbHelper.close();
+                db.close();
             }
             cursor.close();
             dbHelper.close();
             db.close();
         }
 
-        private void trueSave(SFlashcard card){
+        private void trueSave(SFlashcard card) throws Exception {
+
             DBHelper dbHelper = new DBHelper(getContext(), DBHelper.DATABASE_NAME,null,DBHelper.DATABASE_VERSION);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.insert(SFlashcard.TABLE_NAME, null, card.getContentValues());
+            String name = ImageSaver.saveFlashCard(getContext(),card);
             Message msg = new Message();
             msg.what = 3;
             uiHandler.sendMessage(msg);

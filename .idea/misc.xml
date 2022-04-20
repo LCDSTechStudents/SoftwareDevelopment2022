@@ -19,6 +19,8 @@
         <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_result.xml" value="0.2512664640324215" />
         <entry key="..\:/repo/java/SoftwareDevelopment2022-mirage/app/src/main/res/layout/fragment_scan.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/flashcard_item.xml" value="0.18484649658203126" />
+        <entry key="app/src/main/res/layout/fragment_flashcards.xml" value="0.2138671875" />
       </map>
     </option>
   </component>
